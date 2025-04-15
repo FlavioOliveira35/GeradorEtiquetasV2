@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Ocorrência</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #e5ddd5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .form-container {
+      background-color: #e4c0e7;
+      max-width: 95%;
+      width: 400px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 5px rgba(71, 35, 63, 0.2);
+      border-left: 5px solid #470b5f;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 8px;
+      display: block;
+      font-size: 12px;
+      padding-left: 8px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      font-size: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      box-shadow: 2px 2px 5px rgba(71, 35, 63, 0.2);
+    }
+
+    input:hover, select:hover, textarea:hover {
+      border: 1px solid #441044;
+      cursor: pointer;
+    }
+
+    .titulo-alerta {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: rgb(71, 16, 71);
+      margin-bottom: 5px;
+    }
+
+    .titulo-alertaSC {
+      text-align: center;
+      font-size: 10px;
+      font-weight: bold;
+      color: rgb(113, 73, 189);
+      margin-bottom: 15px;
+    }
+
+    .prazo-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .prazo-btn {
+      flex: 1;
+      padding: 8px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      background-color: #f1f1f1;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: 2px 2px 5px rgba(71, 35, 63, 0.2);
+    }
+
+    .prazo-btn.selected {
+      background-color: #6b198b;
+      color: white;
+    }
+
+    #justificativa {
+      display: none;
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 24px;
+      background-color: #43a047;
+      color: white;
+      border: none;
+      padding: 16px;
+      font-size: 16px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: background 0.3s;
+      box-shadow: 2px 2px 5px rgba(71, 35, 63, 0.2);
+    }
+
+    .submit-btn:hover {
+      background-color: #388e3c;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #0a0a0a;
+      margin-top: 20px;
+    }
+
+    /* Adicionado: Flexbox para alinhar os campos na mesma linha */
+    .flex-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .flex-item {
+      flex: 1;
+    }
+
+    #NUMERODAFACHADA {
+        width: 40pt;
+        
+    }
+
+
+    #endereco {
+        width: 140pt;
+    }
+
+    #bairro {
+        width: 60pt;
+    }
+    #tecnicos{
+      width: 250pt;
+      background-color: rgba(105, 105, 105, 0.507);
+      border: 0px solid rgba(233, 218, 233, 0);
+      cursor: not-allowed;
+
+
+    }
+    #codigotecnico{
+      width: 180pt;
+
+    }
+
+    #btntec{
+      cursor: pointer;
+      text-align: center;
+      box-shadow: 2px 2px 5px rgba(71, 35, 63, 0.2);
+      margin-top: 25px;
+       width: 30pt;
+       padding: 10px;
+       border-radius: 45px;
+       background-color: #a79393;
+       color: white;
+       border: none;
+    }
+    #btntec:hover {
+      border: 1px solid #a82b2b;
+      cursor: pointer;
+      background-color: #bd1212;
+    }
+  </style>
+</head>
+
+<body>
+<div class="form-container">
+  <div class="titulo-alerta"> ⚙️ GERADOR DE ETIQUETA</div>
+  <div class="titulo-alertaSC">OSP Santa Catarina</div>
+
+  <!-- OCORRÊNCIA, ARD e SP na mesma linha -->
+
+  <div class="flex-row">
+    <div class="flex-item">
+  <label>Cluster:</label>
+  <select id="codigo11" onchange="atualizaCodigo22()">
+    <option value="">-- Selecione --</option>
+    <option value="Florianopolis">Florianopolis</option>
+    <option value="Blumenau">Blumenau</option>
+    <option value="Joinville">Joinville</option>
+    <option value="Chapeco">Chapeco</option>
+    <option value="Lages">Lages</option>
+
+  </select>
+</div>
+
+<div class="flex-item">
+  <label>Cidade:</label>
+  <select id="codigo22">
+    <option>-- Selecione Cluster primeiro --</option>
+  </select>
+
+</div>
+</div>
+ 
+
+  <div class="flex-row">
+    <div class="flex-item">
+        <label>OCORRÊNCIA:</label>
+        <input type="text" id="ocorrencia" required>
+    </div>
+
+  
+    <div class="flex-item">
+      <label>ARD:</label>
+      <input type="text" id="ard">
+    </div>
+    <div class="flex-item">
+      <label>SP:</label>
+      <input type="text" id="sp">
+    </div>
+  </div>
+
+
+  <div class="flex-row">
+    <div class="flex-item">
+
+  <label>CAUSA:</label>
+  <select id="codigo1" onchange="atualizaCodigo2()">
+    <option value="">-- Selecione --</option>
+    <option value="abalroamento">Abalroamento</option>
+    <option value="Furto">Furto</option>
+    <option value="Acidente">Acidente</option>
+    <option value="Descarga">Descarga</option>
+    <option value="Vandalismo">Vandalismo</option>
+    <option value="Troca de poste">Troca de poste</option>
+    <option value="Degradação/Infiltração">Degradação/Infiltração</option>
+    <option value="Defeito Splitter">Defeito Splitter</option>
+    <option value="Falha em atividade anterior">Falha em atividade anterior</option>
+    <option value="Obras de Terceiros">Obras de Terceiros</option>
+    <option value="INTERPÉRIE">Interpérie</option>
+    <option value="Ataques de Animais">Ataques de Animais</option>
+    <option value="Sem defeito para rede">Sem defeito para rede</option>
+  </select>
+</div>
+
+  <div class="flex-item">
+  <label>SUB CAUSA:</label>
+  <select id="codigo2">
+    <option>-- Selecione Causa Raiz primeiro --</option>
+  </select>
+</div>
+</div>
+  <label>TRATATIVA:</label>
+  <input type="text" id="tratativa">
+
+  <label>MATERIAIS UTILIZADOS:</label>
+  <textarea id="materiais" rows="2"></textarea>
+
+  <div class="flex-row">
+<div class="flex-item">
+  <label>ENDEREÇO:</label>
+  <input type="text" id="endereco">
+</div>
+
+<div class="flex-item">
+    <label>Nº:</label>
+    <input type="text" id="NUMERODAFACHADA">
+ </div>
+
+<div class="flex-item">
+    <label>BAIRRO:</label>
+    <input type="text" id="bairro">
+</div>
+
+</div>
+
+
+
+<div class="flex-row">
+  <div class="flex-item">
+<label>Equipe do Evento:</label>
+<input type="text" id="tecnicos" readonly>
+</div>
+<div class="flex-item">
+<button id="btntec" onclick="limparTecnicos()" >X</button>
+</div>
+</div>
+
+<label>Incluir Técnico:</label>
+<select id="codigotecnico">
+  <option value="">-- Selecione --</option>
+  <option value="Nome1">Nome1</option>
+  <option value="Nome2">Nome2</option>
+  <option value="Nome3">Nome3</option>
+  <option value="Nome4">Nome4</option>
+</select>
+
+
+  <label>ENTREGA NO PRAZO?</label>
+  <div class="prazo-buttons">
+    <div class="prazo-btn" onclick="selecionarPrazo(this, 'Dentro do Prazo')">Dentro do Prazo</div>
+    <div class="prazo-btn" onclick="selecionarPrazo(this, 'Fora do Prazo')">Fora do Prazo</div>
+  </div>
+  <input type="hidden" id="prazoSelecionado">
+
+  <label id="labelJustificativa" style="display:none;">Justificativa (se fora do prazo):</label>
+  <textarea id="justificativa" rows="2"></textarea>
+
+  <button onclick="copiarTexto()" class="submit-btn">Copiar para WhatsApp</button>
+  <div class="final-space"></div>
+
+  <div class="footer">Versão 1.0 - Desenvolvido para uso interno </div>
+</div>
+<script>
+  let tecnicosSelecionados = [];
+
+  // Atualiza campo de texto com os técnicos selecionados
+  function atualizarCampoTecnicos() {
+    document.getElementById("tecnicos").value = tecnicosSelecionados.join(", ");
+  }
+
+  // Adiciona técnico ao selecionar
+  document.getElementById("codigotecnico").addEventListener("change", function () {
+    const tecnico = this.value;
+    if (tecnico && !tecnicosSelecionados.includes(tecnico)) {
+      tecnicosSelecionados.push(tecnico);
+      atualizarCampoTecnicos();
+    }
+    this.value = ""; // limpa a seleção para poder adicionar o mesmo nome se precisar
+  });
+
+  // Limpa a lista de técnicos
+  function limparTecnicos() {
+    tecnicosSelecionados = [];
+    atualizarCampoTecnicos(
+
+
+);
+  }
+
+
+    function atualizaCodigo22() {
+      const codigo11 = document.getElementById("codigo11").value;
+      const codigo22 = document.getElementById("codigo22");
+      codigo22.innerHTML = "";
+      let opcoes = [];
+      if (codigo11 === "Florianopolis") {
+        opcoes = ["", "Florianópolis","Biguaçu","Palhoça","São Jose","Criciuma","Içara","Tubarão","Imbituba","Garopaba"];
+      } else if (codigo11 === "Blumenau") {
+        opcoes = ["", "Blumenau", "Itajai","Navegantes","camboriu","Balneario Camboriu","Brusque","Pomerode","Rio do Sul","Gaspar","Indaial"];
+      } else if (codigo11 === "Joinville") {
+        opcoes = ["", "Joinville", "Jaragua do Sul","São Bento do Sul","Mafra"];
+      } else if (codigo11 === "Chapeco") {
+        opcoes = ["", "Chapeco", "Concórdia","Capinzal","Fraiburgo"];
+      } else if (codigo11 === "Lages") {
+        opcoes = ["", "Lages"];     
+      } else {
+        opcoes = ["-- Selecione Cluster primeiro --"];
+      }
+      opcoes.forEach(opcao => {
+        const opt = document.createElement("option");
+        opt.text = opcao;
+        codigo22.add(opt);
+      });
+    }
+
+//-----------------------------------------------
+//--------------------------------------------
+
+
+
+    function atualizaCodigo2() {
+      const codigo1 = document.getElementById("codigo1").value;
+      const codigo2 = document.getElementById("codigo2");
+      codigo2.innerHTML = "";
+      let opcoes = [];
+      if (codigo1 === "abalroamento") {
+        opcoes = ["", "Cabo baixo"];
+      } else if (codigo1 === "Furto") {
+        opcoes = ["", "Cabo", "CEO", "CTO", "Splitter"];
+      } else if (codigo1 === "Acidente") {
+        opcoes = ["", "Carga Alta"],"Linha de pipa";
+      } else if (codigo1 === "Descarga") {
+        opcoes = ["", "Atmosférica", "Elétrica"];
+      } else if (codigo1 === "Vandalismo") {
+        opcoes = ["", "Tentativa de furto","Depredado"];
+      } else if (codigo1 === "Troca de poste") {
+        opcoes = ["", "Rompimento"];
+      } else if (codigo1 === "Degradação/Infiltração") {
+        opcoes = ["", "CEO", "CTO", "DGOI"];
+      } else if (codigo1 === "Defeito Splitter") {
+        opcoes = ["", "Atenuado", "Fibra Curta", "Saída do Splitter", "Sem sinal"];
+      } else if (codigo1 === "Falha em atividade anterior") {
+        opcoes = ["", "Atenuação", "Desorganização do", "Fibra Invertida", "Fibra Quebrada"];
+      } else if (codigo1 === "Obras de Terceiros") {
+        opcoes = ["", "Outras Obras", "Poda de árvores", "troca de postes não programada"];
+      } else if (codigo1 === "INTERPÉRIE") {
+        opcoes = ["", "Desgate por Tempo"];
+      } else if (codigo1 === "Ataques de Animais") {
+        opcoes = ["", "Abelhas","Formiga","Roedores","Outros"];
+      } else if (codigo1 === "Sem defeito para rede") {
+        opcoes = ["", "Encontrado Ok","Drop Rompido","Falta de Energia","Falha na central"];
+  
+      } else {
+        opcoes = ["-- Selecione Causa Raiz primeiro --"];
+      }
+      opcoes.forEach(opcao => {
+        const opt = document.createElement("option");
+        opt.text = opcao;
+        codigo2.add(opt);
+      });
+    }
+  
+    function selecionarPrazo(btn, valor) {
+      document.querySelectorAll('.prazo-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      document.getElementById("prazoSelecionado").value = valor;
+      const justificativa = document.getElementById("justificativa");
+      const labelJustificativa = document.getElementById("labelJustificativa");
+      if (valor === "Fora do Prazo") {
+        justificativa.style.display = "block";
+        labelJustificativa.style.display = "block";
+      } else {
+        justificativa.style.display = "none";
+        labelJustificativa.style.display = "none";
+        justificativa.value = "";
+      }
+    }
+  
+    
+    function gerarProtocolo() {
+      const data = new Date();
+      return `PROTOCOLO-${data.getFullYear()}${String(data.getMonth()+1).padStart(2,'0')}${String(data.getDate()).padStart(2,'0')}-${Math.floor(Math.random()*10000)}`;
+    }
+  
+    function copiarTexto() {
+      const getVal = id => document.getElementById(id)?.value || "";
+  
+      const protocolo = gerarProtocolo();
+      const dataHora = new Date().toLocaleString("pt-BR");
+  
+      if (!getVal("ocorrencia")) {
+        alert("Por favor, preencha o campo de ocorrência.");
+        return;
+      }
+  
+      const texto = `🚨 TESTAR E ENCERRAR 🚨
+  
+  OCORRÊNCIA: ${getVal("ocorrencia")}
+  ARD: ${getVal("ard")}
+  SP: ${getVal("sp")}
+  CAUSA : ${getVal("codigo1")}
+  SUB CAUSA : ${getVal("codigo2")}
+  TRATATIVA: ${getVal("tratativa")}
+  MATERIAIS UTILIZADOS: ${getVal("materiais")}
+  ENDEREÇO: ${getVal("endereco")}
+  NÚMERO DA FACHADA: ${getVal("NUMERODAFACHADA")}
+  BAIRRO: ${getVal("bairro")}
+  CIDADE: ${getVal("Codigo22")}
+  TÉCNICOS: ${getVal("tecnicos")}
+  ENTREGA NO PRAZO?: ${getVal("prazoSelecionado")}
+  Justificativa (se fora do prazo): ${getVal("justificativa")}`;
+  
+      navigator.clipboard.writeText(texto).then(() => {
+        alert("Texto copiado! Agora cole no WhatsApp.");
+
+        const whatsappURL = `whatsapp://send?text=${encodeURIComponent(texto)}`;
+        window.location.href = whatsappURL;
+
+      });
+    }
+
+    
+  </script>
+   
+  
+
+</body>
+</html>
+
+
+
+
+
