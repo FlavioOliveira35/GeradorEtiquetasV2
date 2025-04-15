@@ -156,7 +156,7 @@
 
     }
     #codigotecnico{
-      width: 180pt;
+      width: 150pt;
 
     }
 
@@ -461,13 +461,11 @@
   SUB CAUSA : ${getVal("codigo2")}
   TRATATIVA: ${getVal("tratativa")}
   MATERIAIS UTILIZADOS: ${getVal("materiais")}
-  ENDEREÇO: ${getVal("endereco")}
-  NÚMERO DA FACHADA: ${getVal("NUMERODAFACHADA")}
-  BAIRRO: ${getVal("bairro")}
+  ENDEREÇO: ${getVal("endereco")} Nº ${getVal("NUMERODAFACHADA")}  
   CIDADE: ${getVal("Codigo22")}
+  BAIRRO: ${getVal("bairro")}  
   TÉCNICOS: ${getVal("tecnicos")}
-  ENTREGA NO PRAZO?: ${getVal("prazoSelecionado")}
-  Justificativa (se fora do prazo): ${getVal("justificativa")}`;
+  ENTREGA NO PRAZO?: ${(getVal("prazoSelecionado") === "Fora do Prazo") ? `Justificativa: ${getVal("justificativa")}` : ""}`;
   
       navigator.clipboard.writeText(texto).then(() => {
         alert("Texto copiado! Agora cole no WhatsApp.");
