@@ -354,24 +354,24 @@
       const codigo11 = document.getElementById("codigo11").value;
       const codigo22 = document.getElementById("codigo22");
       codigo22.innerHTML = "";
-      let opcoes = [];
+      let opcoesc = [];
       if (codigo11 === "Florianopolis") {
-        opcoes = ["", "Florianópolis","Biguaçu","Palhoça","São Jose","Criciuma","Içara","Tubarão","Imbituba","Garopaba"];
+        opcoesc = ["", "Florianópolis","Biguaçu","Palhoça","São Jose","Criciuma","Içara","Tubarão","Imbituba","Garopaba"];
       } else if (codigo11 === "Blumenau") {
-        opcoes = ["", "Blumenau", "Itajai","Navegantes","camboriu","Balneario Camboriu","Brusque","Pomerode","Rio do Sul","Gaspar","Indaial"];
+        opcoesc = ["", "Blumenau", "Itajai","Navegantes","camboriu","Balneario Camboriu","Brusque","Pomerode","Rio do Sul","Gaspar","Indaial"];
       } else if (codigo11 === "Joinville") {
-        opcoes = ["", "Joinville", "Jaragua do Sul","São Bento do Sul","Mafra"];
+        opcoesc = ["", "Joinville", "Jaragua do Sul","São Bento do Sul","Mafra"];
       } else if (codigo11 === "Chapeco") {
-        opcoes = ["", "Chapeco", "Concórdia","Capinzal","Fraiburgo"];
+        opcoesc = ["", "Chapeco", "Concórdia","Capinzal","Fraiburgo"];
       } else if (codigo11 === "Lages") {
-        opcoes = ["", "Lages"];     
+        opcoesc = ["", "Lages"];     
       } else {
-        opcoes = ["-- Selecione Cluster primeiro --"];
+        opcoesc = ["-- Selecione Cluster primeiro --"];
       }
-      opcoes.forEach(opcao => {
+      opcoesc.forEach(opcaoc => {
         const opt = document.createElement("option");
-        opt.text = opcao;
-        codigo22.add(opt);
+        opt.text = opcaoc;
+        codigo22.add(optc);
       });
     }
 
@@ -465,12 +465,13 @@
   TRATATIVA: ${getVal("tratativa")}
   MATERIAIS UTILIZADOS: ${getVal("materiais")}
   ENDEREÇO: ${getVal("endereco")} Nº ${getVal("NUMERODAFACHADA")}  
-  CIDADE: ${getVal("Codigo22")}
+  CIDADE: ${getVal("codigo22")}
   BAIRRO: ${getVal("bairro")}  
   TÉCNICOS: ${getVal("tecnicos")}
-  ENTREGA NO PRAZO?: ${(getVal("prazoSelecionado") === "Fora do Prazo") ? `Justificativa: ${getVal("justificativa")}` : ""}`;
-  
-      navigator.clipboard.writeText(texto).then(() => {
+  ENTREGA NO PRAZO?: ${getVal("prazoSelecionado")}
+  ${(getVal("prazoSelecionado") === "Fora do Prazo") ? `Justificativa: ${getVal("justificativa")}` : ""}`;
+      
+  navigator.clipboard.writeText(texto).then(() => {
         alert("Texto copiado! Agora cole no WhatsApp.");
 
         const whatsappURL = `whatsapp://send?text=${encodeURIComponent(texto)}`;
