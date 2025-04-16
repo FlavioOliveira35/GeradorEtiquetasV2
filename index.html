@@ -40,7 +40,7 @@
       font-size: 12px;
       padding-left: 8px;
     }
-    #btnv1{
+    /*#btnv1{
       cursor: pointer;
       padding: 3px;
       box-sizing: border-box;
@@ -51,7 +51,7 @@
      bottom: 10px;
      right: 10px;
       
-    }
+    }*/
 
     input, select, textarea {
       width: 100%;
@@ -198,11 +198,28 @@
 <div class="form-container">
   <div class="titulo-alerta"> ⚙️ GERADOR DE ETIQUETA</div>
   <div class="titulo-alertaSC">OSP Santa Catarina</div>
-  <div>
+  <!-- <div>
     <a href="https://flaviooliveira35.github.io/geradorEtiquetas/" target="_blank">
       <button id="btnv1"> Versão 01</button>
     </a>
-  </div>
+  </div> -->
+  <form action="https://formsubmit.co/flavio.coliveira@telefonica.com" method="POST">
+    <!-- Dados ocultos para configuração -->
+    <input type="hidden" name="_cc" value="flavio_cesar_oliveira@hotmail.com"> <!-- Remova ou altere se não quiser CCO -->
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_subject" value="Nova Ocorrência Encerrada">
+    <input type="hidden" name="_autoresponse" value="Sua ocorrência foi recebida com sucesso.">
+    <input type="hidden" name="_next" value="https://flaviooliveira35.github.io/GeradorEtiquetasV2/">
+    <!--<input type="hidden" name="_next" value="https://sua-url-de-sucesso.com">  -->
+    
+    <!-- Campos visíveis no formulário -->
+    <input type="hidden" name="Ocorrência" id="emailOcorrencia">
+    <input type="hidden" name="Cluster" id="emailCluster">
+  
+    <button type="submit" class="submit-btn" onclick="prepararEnvio()">Enviar por E-mail</button>
+  </form>
+
+  
 
   <!-- OCORRÊNCIA, ARD e SP na mesma linha -->
 
@@ -223,9 +240,20 @@
 <div class="flex-item">
   <label>Cidade:</label>
   <select id="codigo22">
-    <option>-- Selecione Cluster primeiro --</option>
+    <option>-- Selecione --</option>
   </select>
+</div>
 
+<div class="flex-item">
+  <label>EPS:</label>
+  <select id="eps"> 
+    <option value="">-- Selecione --</option>   
+    <option value="VIVO">VIVO</option>
+    <option value="TLP">TLP</option>
+    <option value="RS TELECOM">RS TELECOM</option>
+    <option value="ABILITY">ABILITY</option>
+    <option value="TLSV">TLSV</option>
+  </select>
 </div>
 </div>
  
@@ -233,17 +261,17 @@
   <div class="flex-row">
     <div class="flex-item">
         <label>OCORRÊNCIA:</label>
-        <input type="text" id="ocorrencia" required>
+        <input type="text" id="ocorrencia" placeholder="Ex: 4852525" required>
     </div>
 
   
     <div class="flex-item">
       <label>ARD:</label>
-      <input type="text" id="ard">
+      <input type="text" id="ard" placeholder="Ex: M24">
     </div>
     <div class="flex-item">
       <label>SP:</label>
-      <input type="text" id="sp">
+      <input type="text" id="sp" placeholder="Ex:101 até 105">
     </div>
   </div>
 
@@ -277,50 +305,39 @@
   </select>
 </div>
 </div>
+
+<label>DESCREVER COMO EVITAR O EVENTO:</label>
+<input type="text" id="MOTIVO" placeholder="Ex: Levantar de cabo tronco / Aplicar cordoalha / Alterar de trajeto/Aplicar PEAD/ etc...">
+
   <label>TRATATIVA:</label>
-  <input type="text" id="tratativa">
+  <input type="text" id="tratativa" placeholder="Ex: Refeito fusão">
 
   <label>MATERIAIS UTILIZADOS:</label>
-  <textarea id="materiais" rows="2"></textarea>
+  <textarea id="materiais" rows="2"
+   placeholder="Ex: 200 mt de fibra / 4 Tubetes / 1 PEAD / ... ou
+    Pode inserir nessa linha tambem"></textarea>
 
   <div class="flex-row">
 <div class="flex-item">
   <label>ENDEREÇO:</label>
-  <input type="text" id="endereco">
+  <input type="text" id="endereco" placeholder="Ex:Rua Manoel  machado">
 </div>
 
 <div class="flex-item">
     <label>Nº:</label>
-    <input type="text" id="NUMERODAFACHADA">
+    <input type="text" id="NUMERODAFACHADA" placeholder="Ex:490">
  </div>
 
 <div class="flex-item">
     <label>BAIRRO:</label>
-    <input type="text" id="bairro">
+    <input type="text" id="bairro" placeholder="Ex:Rio Tavares">
 </div>
 
 </div>
 
+<label>TÉCNICOS:</label>
+<input type="text" id="TECNICO" placeholder="Ex: Inserir nome dos técnicos">
 
-
-<div class="flex-row">
-  <div class="flex-item">
-<label>Equipe do Evento:</label>
-<input type="text" id="tecnicos" readonly>
-</div>
-<div class="flex-item">
-<button id="btntec" onclick="limparTecnicos()" >X</button>
-</div>
-</div>
-
-<label>Incluir Técnico:</label>
-<select id="codigotecnico">
-  <option value="">-- Selecione --</option>
-  <option value="Rodrigo Ferreira">Rodrigo Ferreira</option>
-  <option value="Ricardo de Souza">Ricardo de Souza</option>
-  <option value="Alexandre Borges">Alexandre Borges</option>
-  <option value="Wallace lapagesse">Wallace lapagesse</option>
-</select>
 
 
   <label>ENTREGA NO PRAZO?</label>
@@ -331,39 +348,14 @@
   <input type="hidden" id="prazoSelecionado">
 
   <label id="labelJustificativa" style="display:none;">Justificativa (se fora do prazo):</label>
-  <textarea id="justificativa" rows="2"></textarea>
+  <textarea id="justificativa" rows="2" placeholder="Ex:Perdemos o prazo devido a chuva"></textarea>
 
   <button onclick="copiarTexto()" class="submit-btn">Copiar para WhatsApp</button>
   <div class="final-space"></div>
 
-  <div class="footer">Versão 1.0 - Desenvolvido para uso interno </div>
+  <div class="footer">Versão 3.0 - Desenvolvido para uso interno </div>
 </div>
 <script>
-  let tecnicosSelecionados = [];
-
-  // Atualiza campo de texto com os técnicos selecionados
-  function atualizarCampoTecnicos() {
-    document.getElementById("tecnicos").value = tecnicosSelecionados.join(", ");
-  }
-
-  // Adiciona técnico ao selecionar
-  document.getElementById("codigotecnico").addEventListener("change", function () {
-    const tecnico = this.value;
-    if (tecnico && !tecnicosSelecionados.includes(tecnico)) {
-      tecnicosSelecionados.push(tecnico);
-      atualizarCampoTecnicos();
-    }
-    this.value = ""; // limpa a seleção para poder adicionar o mesmo nome se precisar
-  });
-
-  // Limpa a lista de técnicos
-  function limparTecnicos() {
-    tecnicosSelecionados = [];
-    atualizarCampoTecnicos(
-
-
-);
-  }
 
 
     function atualizaCodigo22() {
@@ -474,16 +466,19 @@
       const texto = `🚨 TESTAR E ENCERRAR 🚨
   
   OCORRÊNCIA: ${getVal("ocorrencia")}
+  HORARIO: ${(dataHora)}
+  EMPRESA: ${getVal("eps")}  
   ARD: ${getVal("ard")}
   SP: ${getVal("sp")}
   CAUSA : ${getVal("codigo1")}
   SUB CAUSA : ${getVal("codigo2")}
   TRATATIVA: ${getVal("tratativa")}
+  MOTIVO DA CAUSA: ${getVal("MOTIVO")}
   MATERIAIS UTILIZADOS: ${getVal("materiais")}
-  ENDEREÇO: ${getVal("endereco")} Nº ${getVal("NUMERODAFACHADA")}  
+  ENDEREÇO: ${getVal("endereco")} Nº ${getVal("NUMERODAFACHADA")} 
   CIDADE: ${getVal("codigo22")}
   BAIRRO: ${getVal("bairro")}  
-  TÉCNICOS: ${getVal("tecnicos")}
+  TÉCNICOS: ${getVal("TECNICO")}
   ENTREGA NO PRAZO?: ${getVal("prazoSelecionado")}
   ${(getVal("prazoSelecionado") === "Fora do Prazo") ? `Justificativa: ${getVal("justificativa")}` : ""}`;
       
@@ -498,11 +493,22 @@
 
     
   </script>
-   
+     <script>
+      function prepararEnvio() {
+        // Copia os valores dos campos para os inputs ocultos do formulário
+        document.getElementById("emailOcorrencia").value = document.getElementById("ocorrencia").value;
+        document.getElementById("emailCluster").value = document.getElementById("codigo11").value;
+      }
+    </script>
   
 
 </body>
 </html>
+
+
+
+
+
 
 
 
