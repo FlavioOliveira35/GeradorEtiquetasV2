@@ -217,7 +217,7 @@
     <input type="hidden" name="Ocorrência" id="emailOcorrencia">
     <input type="hidden" name="Cluster" id="emailCluster">
   
-    <button type="submit" class="submit-btn" onclick="prepararEnvio()">Enviar por E-mail</button>
+   <!-- <button type="submit" class="submit-btn" onclick="prepararEnvio()">Enviar por E-mail</button> -->
   </form>
 
   
@@ -488,6 +488,7 @@
 
         const whatsappURL = `whatsapp://send?text=${encodeURIComponent(texto)}`;
         window.location.href = whatsappURL;
+        prepararEnvio()
 
       });
     }
