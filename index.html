@@ -452,7 +452,8 @@
       const data = new Date();
       return `PROTOCOLO-${data.getFullYear()}${String(data.getMonth()+1).padStart(2,'0')}${String(data.getDate()).padStart(2,'0')}-${Math.floor(Math.random()*10000)}`;
     }
-  
+    setTimeout(()=> {form.submit(); }, 500);
+    
     function copiarTexto() {
       const getVal = id => document.getElementById(id)?.value || "";
   
@@ -493,7 +494,7 @@
         // Copia os valores dos campos para os inputs ocultos do formulário
         document.getElementById("emailOcorrencia").value = document.getElementById("ocorrencia").value;
         document.getElementById("emailCluster").value = document.getElementById("codigo11").value;
-        setTimeout(()=> {form.submit(); }, 500);
+        
       }
         
       
