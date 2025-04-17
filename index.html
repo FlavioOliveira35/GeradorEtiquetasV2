@@ -351,7 +351,7 @@
   <label id="labelJustificativa" style="display:none;">Justificativa (se fora do prazo):</label>
   <textarea id="justificativa" rows="2" placeholder="Ex:Perdemos o prazo devido a chuva"></textarea>
 
-  <button onclick="copiarTexto()" class="submit-btn">Copiar para WhatsApp</button>
+  <button id="btnEnviar" onclick="copiarTexto()" class="submit-btn">Copiar para WhatsApp</button>
   <div class="final-space"></div>
 
   <div class="footer">Versão 3.0 - Desenvolvido para uso interno </div>
@@ -494,6 +494,8 @@
         document.getElementById("emailOcorrencia").value = document.getElementById("ocorrencia").value;
         document.getElementById("emailCluster").value = document.getElementById("codigo11").value;
       }
+        
+      document.getElementById("btnEnviar").addEventListener("click",prepararEnvio)
 
       });
     }
