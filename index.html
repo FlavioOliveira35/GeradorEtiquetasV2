@@ -191,6 +191,15 @@
       cursor: pointer;
       background-color: #bd1212;
     }
+    .caixaon {
+      border: 1 px solid #ccc;
+
+    }
+
+    .caixaoff {
+      display: none;
+
+    }
   </style>
 </head>
 
@@ -205,24 +214,37 @@
   </div> -->
   <form action="https://formsubmit.co/flavio.coliveira@telefonica.com" method="POST">
     <!-- Dados ocultos para configuração -->
-    <input type="hidden" name="_cc" value="flavio_cesar_oliveira@hotmail.com">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_subject" value="Ocorrência Encerrada">
-    <input type="hidden" name="_autoresponse" value="Sua ocorrência foi recebida com sucesso.">
-    <input type="hidden" name="_next" value="https://flaviooliveira35.github.io/GeradorEtiquetasV2/"> 
+    <input type="hidden" name="_cc" value="flavio_cesar_oliveira@hotmail.com"> <!-- Remova ou altere se não quiser CCO -->
     <input type="hidden" name="_captcha" value="false">
-    
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_subject" value="Nova Ocorrência Encerrada">
+    <input type="hidden" name="_autoresponse" value="Sua ocorrência foi recebida com sucesso.">
+    <input type="hidden" name="_next" value="https://flaviooliveira35.github.io/GeradorEtiquetasV2/">
+    <!--<input type="hidden" name="_next" value="https://sua-url-de-sucesso.com">  -->
     
     <!-- Campos visíveis no formulário -->
     <input type="hidden" name="Ocorrência" id="emailOcorrencia">
     <input type="hidden" name="Cluster" id="emailCluster">
   
-    <button id="btnsubmit" type="submit" class="submit-btn" style="display:none" onclick="prepararEnvio()">Enviar por E-mail</button>
+    <button type="submit" class="submit-btn" onclick="prepararEnvio()">Enviar por E-mail</button>
   </form>
 
   
+<!-- editar uf -->
+<button onclick="alternarcaixas()">Editar</button>
+<div id="Caixa1" class="caixa">
+  <p> texto de outros estados</p>
+</div>
+
+
+<div id="Caixa2" class="caixa">
+  <label for="novo texto"> novo texto:</label><br>
+  <input type="text" id="novoTexto">
+</div>
+
 
   <!-- OCORRÊNCIA, ARD e SP na mesma linha -->
+
 
   <div class="flex-row">
     <div class="flex-item">
@@ -454,7 +476,6 @@
     }
   
     function copiarTexto() {
-      document.getElementById("btnsubmit").click()
       const getVal = id => document.getElementById(id)?.value || "";
   
       const protocolo = gerarProtocolo();
@@ -500,13 +521,34 @@
         // Copia os valores dos campos para os inputs ocultos do formulário
         document.getElementById("emailOcorrencia").value = document.getElementById("ocorrencia").value;
         document.getElementById("emailCluster").value = document.getElementById("codigo11").value;
-        
       }
     </script>
-  
+    <script>
+      let = false;
 
-</body>
-</html>
+      function alternarCaixas() {
+      const caixa1 =  document.getElementById("caixa1")
+      const caixa2 =  document.getElementById("caixa2")
+      const botao =  document.getElementById("botaoEditar")
+
+      /*function alternarCaixas() {
+        document.getElementById("caixa1").style.display = "none";
+        document.getElementById("caixa2").style.display = "block";
+      }*/
+     if (modoedicao) {
+      caixa1.style.display = "block";
+      caixa2.style.display = "none";
+      botao.textContent = "Editar";
+     } else {
+      caixa1.style.display = "none";
+      caixa2.style.display = "block";
+      botao.textContent = "cancelar";
+     }
+     modoedicao = !modoEdicao;
+    }
+
+     
+    </script>
 
 
 
