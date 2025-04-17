@@ -493,9 +493,10 @@
         // Copia os valores dos campos para os inputs ocultos do formulário
         document.getElementById("emailOcorrencia").value = document.getElementById("ocorrencia").value;
         document.getElementById("emailCluster").value = document.getElementById("codigo11").value;
+        setTimeout(()=> {form.submit(); }, 500);
       }
         
-      document.getElementById("btnEnviar").addEventListener("click",prepararEnvio)
+      
 
       });
     }
