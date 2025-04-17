@@ -217,7 +217,7 @@
     <input type="hidden" name="Ocorrência" id="emailOcorrencia">
     <input type="hidden" name="Cluster" id="emailCluster">
   
-   <!-- <button type="submit" class="submit-btn" onclick="prepararEnvio()">Enviar por E-mail</button> -->
+    <button id="btnsubmit" type="submit" class="submit-btn" style="display:none" onclick="prepararEnvio()">Enviar por E-mail</button>
   </form>
 
   
@@ -351,7 +351,7 @@
   <label id="labelJustificativa" style="display:none;">Justificativa (se fora do prazo):</label>
   <textarea id="justificativa" rows="2" placeholder="Ex:Perdemos o prazo devido a chuva"></textarea>
 
-  <button id="btnEnviar" onclick="copiarTexto()" class="submit-btn">Copiar para WhatsApp</button>
+  <button onclick="copiarTexto()" class="submit-btn">Copiar para WhatsApp</button>
   <div class="final-space"></div>
 
   <div class="footer">Versão 3.0 - Desenvolvido para uso interno </div>
@@ -452,9 +452,9 @@
       const data = new Date();
       return `PROTOCOLO-${data.getFullYear()}${String(data.getMonth()+1).padStart(2,'0')}${String(data.getDate()).padStart(2,'0')}-${Math.floor(Math.random()*10000)}`;
     }
-    
-
+  
     function copiarTexto() {
+      document.getElementById("btnsubmit").click()
       const getVal = id => document.getElementById(id)?.value || "";
   
       const protocolo = gerarProtocolo();
@@ -483,32 +483,27 @@
   TÉCNICOS: ${getVal("TECNICO")}
   ENTREGA NO PRAZO?: ${getVal("prazoSelecionado")}
   ${(getVal("prazoSelecionado") === "Fora do Prazo") ? `Justificativa: ${getVal("justificativa")}` : ""}`;
-
-
-  document.getElementById("btnEnviar").addEventListener("click", prepararEnvio)
-  setTimeout(()=> {form.submit(); }, 500);   
-  
+      
   navigator.clipboard.writeText(texto).then(() => {
         alert("Texto copiado! Agora cole no WhatsApp.");
 
         const whatsappURL = `whatsapp://send?text=${encodeURIComponent(texto)}`;
         window.location.href = whatsappURL;
 
-               
-      
-
       });
     }
 
     
   </script>
-    <script>
+     <script>
       function prepararEnvio() {
         // Copia os valores dos campos para os inputs ocultos do formulário
         document.getElementById("emailOcorrencia").value = document.getElementById("ocorrencia").value;
         document.getElementById("emailCluster").value = document.getElementById("codigo11").value;
+        
       }
-  </script>
+    </script>
+  
 
 </body>
 </html>
