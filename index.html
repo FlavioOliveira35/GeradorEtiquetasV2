@@ -191,6 +191,7 @@
       cursor: pointer;
       background-color: #bd1212;
     }
+
     .caixa1 {
       border: 1 px solid #ccc;
 
@@ -226,11 +227,10 @@
     <input type="hidden" name="Ocorrência" id="emailOcorrencia">
     <input type="hidden" name="Cluster" id="emailCluster">
   
-    <button type="submit" class="submit-btn" onclick="prepararEnvio()">Enviar por E-mail</button>
+    <button id="btnsubmit" type="submit" class="submit-btn" style="display:none" onclick="prepararEnvio()">Enviar por E-mail</button>
   </form>
 
-  
-<!-- editar uf -->
+  <!-- editar uf -->
 <button onclick="alternarcaixas()">Editar</button>
 <div id="Caixa1" class="caixa">
   <p> texto de outros estados</p>
@@ -242,9 +242,7 @@
   <input type="text" id="novoTexto">
 </div>
 
-
   <!-- OCORRÊNCIA, ARD e SP na mesma linha -->
-
 
   <div class="flex-row">
     <div class="flex-item">
@@ -476,6 +474,7 @@
     }
   
     function copiarTexto() {
+      document.getElementById("btnsubmit").click()
       const getVal = id => document.getElementById(id)?.value || "";
   
       const protocolo = gerarProtocolo();
@@ -521,34 +520,40 @@
         // Copia os valores dos campos para os inputs ocultos do formulário
         document.getElementById("emailOcorrencia").value = document.getElementById("ocorrencia").value;
         document.getElementById("emailCluster").value = document.getElementById("codigo11").value;
+        
       }
     </script>
-    <script>
-      let = false;
 
-      function alternarCaixas() {
-      const caixa1 =  document.getElementById("caixa1")
-      const caixa2 =  document.getElementById("caixa2")
-      const botao =  document.getElementById("botaoEditar")
+<script>
+  let = false;
 
-      /*function alternarCaixas() {
-        document.getElementById("caixa1").style.display = "none";
-        document.getElementById("caixa2").style.display = "block";
-      }*/
-     if (modoedicao) {
-      caixa1.style.display = "block";
-      caixa2.style.display = "none";
-      botao.textContent = "Editar";
-     } else {
-      caixa1.style.display = "none";
-      caixa2.style.display = "block";
-      botao.textContent = "cancelar";
-     }
-     modoedicao = !modoEdicao;
-    }
+  function alternarCaixas() {
+  const caixa1 =  document.getElementById("caixa1")
+  const caixa2 =  document.getElementById("caixa2")
+  const botao =  document.getElementById("botaoEditar")
 
-     
-    </script>
+  /*function alternarCaixas() {
+    document.getElementById("caixa1").style.display = "none";
+    document.getElementById("caixa2").style.display = "block";
+  }*/
+ if (modoedicao) {
+  caixa1.style.display = "block";
+  caixa2.style.display = "none";
+  botao.textContent = "Editar";
+ } else {
+  caixa1.style.display = "none";
+  caixa2.style.display = "block";
+  botao.textContent = "cancelar";
+ }
+ modoedicao = !modoEdicao;
+}
+
+ 
+</script>
+  
+
+</body>
+</html>
 
 
 
