@@ -452,8 +452,8 @@
       const data = new Date();
       return `PROTOCOLO-${data.getFullYear()}${String(data.getMonth()+1).padStart(2,'0')}${String(data.getDate()).padStart(2,'0')}-${Math.floor(Math.random()*10000)}`;
     }
-    setTimeout(()=> {form.submit(); }, 500);
     
+
     function copiarTexto() {
       const getVal = id => document.getElementById(id)?.value || "";
   
@@ -483,20 +483,18 @@
   TÉCNICOS: ${getVal("TECNICO")}
   ENTREGA NO PRAZO?: ${getVal("prazoSelecionado")}
   ${(getVal("prazoSelecionado") === "Fora do Prazo") ? `Justificativa: ${getVal("justificativa")}` : ""}`;
-      
+
+
+  document.getElementById("btnEnviar").addEventListener("click", prepararEnvio)
+  setTimeout(()=> {form.submit(); }, 500);   
+  
   navigator.clipboard.writeText(texto).then(() => {
         alert("Texto copiado! Agora cole no WhatsApp.");
 
         const whatsappURL = `whatsapp://send?text=${encodeURIComponent(texto)}`;
         window.location.href = whatsappURL;
 
-        function prepararEnvio() {
-        // Copia os valores dos campos para os inputs ocultos do formulário
-        document.getElementById("emailOcorrencia").value = document.getElementById("ocorrencia").value;
-        document.getElementById("emailCluster").value = document.getElementById("codigo11").value;
-        
-      }
-        
+               
       
 
       });
@@ -504,8 +502,13 @@
 
     
   </script>
-    
-  
+    <script>
+      function prepararEnvio() {
+        // Copia os valores dos campos para os inputs ocultos do formulário
+        document.getElementById("emailOcorrencia").value = document.getElementById("ocorrencia").value;
+        document.getElementById("emailCluster").value = document.getElementById("codigo11").value;
+      }
+  </script>
 
 </body>
 </html>
