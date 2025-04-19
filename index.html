@@ -6,6 +6,74 @@
   <title>Cadastro de Ocorrência</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    
+    /* Estilo da tela de abertura */
+    #telaAbertura {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom right, #3b1447, #9127b1);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      text-align: center;
+    }
+
+    /* Cabeçalho no topo */
+    #telaAbertura header {
+      position: absolute;
+      top: 30px;
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    /* Botão central redondo e pulsante */
+    #telaAbertura button {
+      background-color: #ffffff;
+      color: #6d196d;
+      border: none;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      animation: pulse 2s infinite;
+      box-shadow: 0 0 0 rgba(255,255,255, 0.4);
+      transition: transform 0.3s ease;
+    }
+
+    #telaAbertura button:hover {
+      transform: scale(1.1);
+    }
+
+    /* Animação pulsante */
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255,255,255, 0.5);
+      }
+      70% {
+        box-shadow: 0 0 0 35px rgba(255,255,255, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(255,255,255, 0);
+      }
+    }
+
+    /* Conteúdo do app escondido por padrão */
+    #app {
+      display: none;
+      padding: 20px;
+    }
+
+  
+ /* ----------------------------------------------*/
    body {
       margin: 0;
       padding: 0;
@@ -192,19 +260,50 @@
       background-color: #bd1212;
     }
 
-    .Caixa1 {
+    #Caixa1 {
       border: 1 px solid #ccc;
 
     }
-
-    .Caixa2 {
+    
+    
+    #botaoEditar, #botaoEditarlivre{
+      flex: 1;
+      font-size: 10px;
+      padding: 4px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background-color: #d3ca4b;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: 2px 2px 5px rgba(71, 35, 63, 0.2);
+      width: 60px;
+    }
+    #Caixa2, #Caixa3 {
       display: none;
 
     }
+
+     #botaoEditarlivre:Hover, #botaoEditar:Hover {
+      background-color: #6b198b;
+      color: white;
+    }
+    
   </style>
 </head>
 
 <body>
+  
+  <!-- Tela de abertura -->
+  <div id="telaAbertura">
+    <button onclick="iniciarApp()">INICIAR</button>
+  </div>
+
+ 
+ 
+
+
+
+
 <div class="form-container">
   <div class="titulo-alerta"> ⚙️ GERADOR DE ETIQUETA</div>
   <div class="titulo-alertaSC">OSP Santa Catarina</div>
@@ -230,21 +329,19 @@
     <button id="btnsubmit" type="submit" class="submit-btn" style="display:none" onclick="prepararEnvio()">Enviar por E-mail</button>
   </form>
 
-  <!-- editar uf -->
-<button onclick="alternarCaixas()">Editar</button>
-<div id="Caixa1" class="caixa">
-  <p> texto de outros estados</p>
+  <!-- editar uf em 2 caixas diferentes -->
+
+<div id="retorno" class="flex-row">
+<div class="flex-item">
+<button id="botaoEditar" onclick="alternarCaixas()">Editar UF</button>
+<button id="botaoEditarlivre" onclick="alternarCaixaslivre()">Livre</button>
+</div>
 </div>
 
 
-<div id="Caixa2" class="caixa">
-  <label for="novo texto"> novo texto:</label><br>
-  <input type="text" id="novoTexto">
-</div>
 
-  <!-- OCORRÊNCIA, ARD e SP na mesma linha -->
-
-  <div class="flex-row">
+  <!-- cluster, cidade e eps na mesma linha caixa 1 sc -->
+  <div id="Caixa1" class="flex-row">
     <div class="flex-item">
   <label>Cluster:</label>
   <select id="codigo11" onchange="atualizaCodigo22()">
@@ -277,7 +374,72 @@
   </select>
 </div>
 </div>
- 
+<!-- cluster, cidade e eps na mesma linha caixa 1 SC  FIM -->
+
+<!-- cluster, cidade e eps na mesma linha caixa 1 rs/cta  INICO-->
+<div id="Caixa2" class="flex-row">
+  <div class="flex-item">
+<label>Cluster:</label>
+<select id="codigo11111" onchange="atualizaCodigo22222()">
+  <option value="">-- Selecione --</option>
+  <option value="Curitiba">Curitiba</option>
+  <option value="Londrina">Londrina</option>
+  <option value="Maringa">Maringa</option>
+  <option value="Caxias do Sul">Caxias do Sul</option>
+  <option value="Canoas">Canoas</option>
+  <option value="Santa Maria">Santa Maria</option>
+  <option value="Novo hamburgo">Novo hamburgo</option>
+  <option value="Foz do Iguaçu">Foz do Iguaçu</option>
+  <option value="Cascavel">Cascavel</option>
+  <option value="Pelotas">Pelotas</option>
+  <option value="Ponta Grossa">Ponta Grossa</option> 
+
+</select>
+</div>
+
+<div class="flex-item">
+<label>Cidade:</label>
+<select id="codigo22222">
+  <option>-- Selecione --</option>
+</select>
+</div>
+
+<div class="flex-item">
+<label>EPS:</label>
+<select id="eps_rs"> 
+  <option value="">-- Selecione --</option>   
+  <option value="VIVO">VIVO</option>
+  <option value="TLP">TLP</option>
+  <option value="RS TELECOM">RS TELECOM</option>
+  <option value="ABILITY">ABILITY</option>
+  <option value="TLSV">TLSV</option>
+</select>
+</div>
+</div>
+
+<!-- cluster, cidade e eps na mesma linha caixa 1 rs/cta  FIM -->
+
+
+<!-- cluster, cidade e eps na mesma linha caixa 1 livre  INICO-->
+<div id="Caixa3" class="flex-row">
+<div class="flex-item">
+<label>Cluster:</label>
+<input type="text" id="codigo11111livre">
+</div>
+
+<div class="flex-item">
+<label>Cidade:</label>
+<input type="text" id="codigo22222livre">
+</div>
+
+<div class="flex-item">
+<label>EPS:</label>
+<input type="text" id="epslivre">
+</div>
+</div>
+
+
+<!-- cluster, cidade e eps na mesma linha caixa 1 livre  FIM -->
 
   <div class="flex-row">
     <div class="flex-item">
@@ -404,6 +566,47 @@
       });
     }
 
+    function atualizaCodigo22222() {
+      const codigo11111 = document.getElementById("codigo11111").value;
+      const codigo22222 = document.getElementById("codigo22222");
+      codigo22222.innerHTML = "";
+      let opcoersu = [];
+      if (codigo11111 === "Curitiba") {
+        opcoersu = ["", "Curitiba","São Jose dos Pinhais","Pinhais","Colombo","Campo Largo","Araucaria"];
+      } else if (codigo11111 === "Porto Alegre") {
+        opcoersu = ["", "Porto Alegre", "Tramandai","Capao da Canoa","Osorio","Guaiba","Xangri la","Viamão","Torres","Charqueadas"];
+      } else if (codigo11111 === "Londrina") {
+        opcoersu = ["", "Londrina", "Apucarana","Rolandia","Arapongas","cambe"];
+      } else if (codigo11111 === "Canoas") {
+        opcoersu = ["", "Canoas", "Esteio","Cachoeirinha","Gravatai","Alvorada"];
+      } else if (codigo11111 === "Maringa") {
+        opcoersu = ["", "Maringa","Campo Mourão","Cianorte","Amuarama","Marialva","Paranavai"];
+      } else if (codigo11111 === "Caxias do Sul") {
+        opcoersu = ["", "Caxias do Sul","Erechim","Lajeado","Vacaria","Carazinho","São Marcos","Carlos Barbosa","Flores da Cunha","Garibaldi","Lagoa Vermelha","Gramado","Canela","Veranopolis","Estrela","Nova Petropolis","Sarandi","Teutonia"]; 
+      } else if (codigo11111 === "Santa Maria") {
+        opcoersu = ["", "Cachoeira do Sul","Santa Maria","Uruguaiana","Ijui","Santana do Livramento","Alegrete","Santo Angelo","Verancio Aires","Santa Rsoa","Tres de Maio","Palmeira das Missoes","Sant Ana do Livramento"]; 
+      } else if (codigo11111 === "Novo hamburgo") {
+        opcoersu = ["", "Novo hamburgo","São Leopoldo","Ivoti","Taquara","Dois Irmãos","Igrejinha","Campo Bom","Estancia Velha"];
+      } else if (codigo11111 === "Foz do Iguaçu") {
+        opcoersu = ["", "Foz do Iguaçu"];  
+      } else if (codigo11111 === "Cascavel") {
+        opcoersu = ["", "Cascavel","Toledo","Pato Branco","FranciscoBeltrão"];  
+      } else if (codigo11111 === "Pelotas") {
+        opcoersu = ["", "Pelotas","bage","Camaqua"];
+      } else if (codigo11111 === "Ponta Grossa") {
+        opcoersu = ["", "Ponta Grossa","Guarapuava"];  
+      } else {      
+          opcoersu = ["-- Selecione Cluster primeiro --"];
+      
+      }
+
+      opcoersu.forEach(opcaorsul => {
+        const optrsul = document.createElement("option");
+        optrsul.text = opcaorsul;
+        codigo22222.add(optrsul);
+      });
+    }
+
 //-----------------------------------------------
 //--------------------------------------------
 
@@ -441,8 +644,8 @@
       } else if (codigo1 === "Sem defeito para rede") {
         opcoes = ["", "Encontrado Ok","Drop Rompido","Falta de Energia","Falha na central"];
   
-      } else {
-        opcoes = ["-- Selecione Causa Raiz primeiro --"];
+      } else {        
+          opcoes = ["-- Selecione Causa primeiro --"];  
       }
       opcoes.forEach(opcao => {
         const opt = document.createElement("option");
@@ -484,21 +687,30 @@
         alert("Por favor, preencha o campo de ocorrência.");
         return;
       }
+
+      let cidade10 = "";
+      if(getVal("codigo22") === "-- Selecione --" && getVal("codigo22222") === "-- Selecione --") {
+        cidade10 = getVal("codigo22222livre")
+      } else if(getVal("codigo22") === "-- Selecione --") {
+        cidade10 = getVal("codigo22222")
+      } else {
+        cidade10 = getVal("codigo22")
+      }
   
       const texto = `🚨 TESTAR E ENCERRAR 🚨
   
   OCORRÊNCIA: ${getVal("ocorrencia")}
   HORARIO: ${(dataHora)}
-  EMPRESA: ${getVal("eps")}  
+  EMPRESA: ${getVal("eps")} ${getVal("eps_rs")}  ${getVal("epslivre")} 
   ARD: ${getVal("ard")}
   SP: ${getVal("sp")}
   CAUSA : ${getVal("codigo1")}
   SUB CAUSA : ${getVal("codigo2")}
   TRATATIVA: ${getVal("tratativa")}
   MOTIVO DA CAUSA: ${getVal("MOTIVO")}
-  MATERIAIS UTILIZADOS: ${getVal("materiais")}
-  ENDEREÇO: ${getVal("endereco")} Nº ${getVal("NUMERODAFACHADA")} 
-  CIDADE: ${getVal("codigo22")}
+  MATERIAIS UTILIZADOS: ${getVal("materiais")}  
+  ENDEREÇO: ${getVal("endereco")} Nº ${getVal("NUMERODAFACHADA")}    
+  CIDADE: ${cidade10}
   BAIRRO: ${getVal("bairro")}  
   TÉCNICOS: ${getVal("TECNICO")}
   ENTREGA NO PRAZO?: ${getVal("prazoSelecionado")}
@@ -525,31 +737,83 @@
     </script>
 
 <script>
-  let modoedicao = false;
+  var modoedicao = false;
+  
 
   function alternarCaixas() {
   const caixa1 =  document.getElementById("Caixa1")
   const caixa2 =  document.getElementById("Caixa2")
   const botao =  document.getElementById("botaoEditar")
+ 
 
-  /*function alternarCaixas() {
-    document.getElementById("caixa1").style.display = "none";
-    document.getElementById("caixa2").style.display = "block";
-  }*/
+  
  if (modoedicao) {
-  caixa1.style.display = "block";
+  caixa1.style.display = "flex";
   caixa2.style.display = "none";
-  botao.textContent = "Editar";
+  botao.textContent = "SC";
+  
+  
  } else {
   caixa1.style.display = "none";
-  caixa2.style.display = "block";
-  botao.textContent = "cancelar";
+  caixa2.style.display = "flex";
+  botao.textContent = "Sul";
+  
+  
  }
- modoedicao = !modoEdicao;
-}
+ modoedicao = !modoedicao;
+ m
+  }
+
+  var modoedicaolivre = true;
+  function alternarCaixaslivre() {
+  const caixa1 =  document.getElementById("Caixa1")
+  const caixa2 =  document.getElementById("Caixa2")
+  const caixa3 =  document.getElementById("Caixa3")
+  const botao =  document.getElementById("botaoEditar")
+  const botaolivre =  document.getElementById("botaoEditarlivre")
+
+ 
+  
+ if (modoedicaolivre) {
+  caixa1.style.display = "none";
+  caixa2.style.display = "none";
+  caixa3.style.display = "flex";
+  botao.style.display = "none";   
+  botaolivre.textContent = "Voltar";
+  
+ } else {
+  caixa1.style.display = "flex";
+  caixa2.style.display = "none";
+  caixa3.style.display = "none";
+  botao.style.display = "flex";  
+  botaolivre.textContent = "Livre";
+  window.location.href  = "https://flaviooliveira35.github.io/GeradorEtiquetasV2/"
+ 
+  
+ }
+ modoedicaolivre = !modoedicaolivre;
+  }
 
  
 </script>
+<script>
+  function iniciarApp() {
+    const splash = document.getElementById("telaAbertura");
+    splash.style.opacity = 1;
+    // Faz uma transição suave ao sumir
+    const fade = setInterval(() => {
+      if (splash.style.opacity > 0) {
+        splash.style.opacity -= 0.03;
+      } else {
+        clearInterval(fade);
+        splash.style.display = "none";
+        document.getElementById("app").style.display = "block";
+      }
+    }, 30);
+  }
+</script>
+
+
   
 
 </body>
